@@ -17,10 +17,10 @@ jobs:
         run: echo "${{ toJSON(github) }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+      - name: Authenticate with GitHub CLI
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
       - name: Add label to issue
-        run: gh issue edit "${{ github.event.issue.number }}" --repo ${{ github.repository }} --add-label "new-issue" && gh issue edit "${{ github.event.issue.number }}" --repo ${{ github.repository }} --add-label "new-issue"
+        run: gh issue edit "${{ github.event.issue.number }}" --repo ${{ github.repository }} --add-label "new-issue"
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           GH_REPO: ${{ github.repository }}
