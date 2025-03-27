@@ -9,11 +9,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Section_4
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Change Directory
-        run: cd Section_4
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
