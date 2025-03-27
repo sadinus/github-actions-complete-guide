@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: Section_4
+        working-directory: basic_workflows
     steps:
       - name: Checkout
         uses: actions/checkout@v4
