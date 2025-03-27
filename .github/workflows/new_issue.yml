@@ -10,8 +10,13 @@ jobs:
     permissions:
       issues: write
     steps:
-      - run: gh issue edit "$ISSUE_NUMBER" --add-label "new-issue" --create-label=true
+      - name: Check github context
+        run: echo "${{ toJSON(github) }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
+
+      - name: Add label to issue
+        run: gh issue edit "$ISSUE_NUMBER" --add-label "new-issue"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
