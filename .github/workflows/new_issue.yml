@@ -20,8 +20,4 @@ jobs:
       - name: Authenticate with GitHub CLI
         run: echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
       - name: Add label to issue
-        run: gh issue edit "${{ github.event.issue.number }}" --repo ${{ github.repository }} --add-label $GH_LABEL
-        env:
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-          GH_REPO: ${{ github.repository }}
-          GH_LABEL: new issue
+        run: gh issue edit "${{ github.event.issue.number }}" --repo ${{ github.repository }} --add-label "new issue"
