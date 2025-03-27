@@ -1,21 +1,17 @@
-name: New Issue
-
+name: Label issues
 on:
   issues:
-    types: [opened]
-
+    types:
+      - reopened
+      - opened
 jobs:
-  show-issue-info:
+  label_issues:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Show issue information
-        run: |
-          echo "Issue title: $ISSUE_TITLE"
-          echo "Issue body: $ISSUE_BODY"
-          echo "Issue user: $ISSUE_USER"
-          echo "Issue number: $ISSUE_NUMBER"
-          echo "Number of issues currently open: $(gh issue list --state open --limit 1 | wc -l)"
-      - name: Add tag to issue
-        run: gh issue edit $ISSUE_NUMBER --add-label "new-issue"
+      - run: gh issue edit "$ISSUE_NUMBER" --add-label "new-issue" --create-label=true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
