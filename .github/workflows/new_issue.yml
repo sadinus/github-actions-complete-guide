@@ -15,7 +15,7 @@ jobs:
 
       - name: Check github context
         run: echo "${{ toJSON(github) }}"
-      - name: Authenticate with GitHub CLI
-        run: echo gh auth login --with-token
       - name: Add label to issue
         run: gh issue edit "${{ github.event.issue.number }}" --repo ${{ github.repository }} --add-label "new issue"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
