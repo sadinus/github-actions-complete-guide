@@ -19,7 +19,8 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Add label to issue
-        run: gh issue edit "$ISSUE_NUMBER" --add-label "new-issue"
+        run: gh issue edit "${{ github.event.issue.number }}" --repo ${{ github.repository }} --add-label "new-issue" && gh issue edit "${{ github.event.issue.number }}" --repo ${{ github.repository }} --add-label "new-issue"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
+          GH_REPO: ${{ github.repository }}
