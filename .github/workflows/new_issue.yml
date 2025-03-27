@@ -10,9 +10,6 @@ jobs:
     permissions:
       issues: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: Check github context
         run: echo "${{ toJSON(github) }}"
       - name: Add label to issue
