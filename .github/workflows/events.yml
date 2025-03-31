@@ -14,3 +14,10 @@ on:
     paths-ignore: # runs when any file change except this
       - ".github/workflows/*"
     # paths: runs only when specified file path change
+
+jobs:
+  run-workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v4
