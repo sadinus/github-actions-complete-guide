@@ -1,0 +1,16 @@
+name: Events
+on:
+  pull_request:
+    types:
+      - opened
+    branches:
+      - test # test
+      - "dev-*" # dev-new dev-this-is-new
+      - "feat/**" # feat/new feat/this-is-new
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths-ignore: # runs when any file change except this
+      - ".github/workflows/*"
+    # paths: runs only when specified file path change
