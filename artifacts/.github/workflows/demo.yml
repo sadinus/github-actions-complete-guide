@@ -1,4 +1,4 @@
-name: Events Demo 1
+name: Artifacts
 on:
   push:
     branch:
