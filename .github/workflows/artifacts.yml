@@ -25,7 +25,7 @@ jobs:
       run:
         working-directory: src
     outputs:
-      script-file: ${{ steps.build.outputs.script-file }}
+      js-filename: ${{ steps.build.outputs.js-filename }}
     steps:
       - name: Get code
         uses: actions/checkout@v4
@@ -35,7 +35,7 @@ jobs:
         run: npm run build
       - name: Publish JS filename
         id: publish
-        run: find dist/assets/*.js -type f -exec echo "script-file={}" >> $GITHUB_OUTPUT \;
+        run: js_file=$(basename dist/assets/*.js) echo "js_filename=$js_file" >> $GITHUB_OUTPUT
       - uses: actions/upload-artifact@v4
         with:
           name: dist-files
@@ -51,4 +51,4 @@ jobs:
       - name: Output files
         run: ls
       - name: Output filename
-        run: echo ${{ needs.build.outputs.script-file }}
+        run: echo ${{ needs.build.outputs.js-filename }}
