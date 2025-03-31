@@ -1,7 +1,7 @@
 name: Artifacts
 on:
   push:
-    branch:
+    branches:
       - main
 jobs:
   test:
@@ -25,7 +25,7 @@ jobs:
       run:
         working-directory: src
     outputs:
-      js-filename: ${{ steps.build.outputs.js-filename }}
+      js-filename: ${{ steps.publish.outputs.js_filename }}
     steps:
       - name: Get code
         uses: actions/checkout@v4
@@ -35,7 +35,9 @@ jobs:
         run: npm run build
       - name: Publish JS filename
         id: publish
-        run: js_file=$(basename dist/assets/*.js) echo "js_filename=$js_file" >> $GITHUB_OUTPUT
+        run: |
+          js_file=$(basename dist/assets/*.js)
+          echo "js_filename=$js_file" >> $GITHUB_ENV
       - uses: actions/upload-artifact@v4
         with:
           name: dist-files
