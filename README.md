@@ -9,3 +9,7 @@ Such commit message will not run workflows.
 `git commit -m "added comments [skip ci]"`
 
 More details [here](https://docs.github.com/en/actions/managing-workflow-runs-and-deployments/managing-workflow-runs/skipping-workflow-runs)
+
+# Output vs Artifact
+
+Output is just a value like filename, artifact is a zip file containing an actual files.
