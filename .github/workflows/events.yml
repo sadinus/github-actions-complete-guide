@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      - test
     paths-ignore: # runs when any file change except this
       - ".github/workflows/*"
     # paths: runs only when specified file path change
