@@ -13,3 +13,9 @@ More details [here](https://docs.github.com/en/actions/managing-workflow-runs-an
 # Output vs Artifact
 
 Output is just a value like filename, artifact is a zip file containing an actual files.
+
+# Caching
+
+It saves the result of some steps, so in next job it can be used from cache.
+
+`actions/cache@v4`
