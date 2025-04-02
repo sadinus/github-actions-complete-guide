@@ -36,3 +36,12 @@ jobs:
         run: npm run build
       - name: Deploy
         run: echo "Deployment completed..."
+  report:
+    needs: [build]
+    runs-on: ubuntu-latest
+    if: failure()
+    steps:
+      - name: Output information
+        run: |
+          echo "Something went wrong"
+          echo "${{ github }}"
