@@ -1,0 +1,38 @@
+name: Conditions
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: src
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Clean install
+        run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Test
+        id: test
+        run: npm run test
+      - name: Upload test report
+        if: failure() && steps.test.outcome == 'failure'
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: test.json
+      - name: Build
+        run: npm run build
+      - name: Deploy
+        run: echo "Deployment completed..."
