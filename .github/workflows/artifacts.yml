@@ -44,7 +44,7 @@ jobs:
       - name: Publish JS filename
         id: publish
         run: |
-          echo "js_file=$(basename dist/assets/*.js)"
+          js_file=$(basename dist/assets/*.js)
           echo "$js_file"
           echo "js_filename=$js_file" >> $GITHUB_OUTPUT
       - uses: actions/upload-artifact@v4
